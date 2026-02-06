@@ -8,12 +8,14 @@ export const estimatePlanetaryPositions = async (birthInfo: Partial<NatalData>):
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
     
     const prompt = `
-        Como un astrómano experto en efemérides, estima con la mayor precisión posible las posiciones planetarias (Signo y Casa) 
+        Como un astrómano experto en efemérides y astrología esotérica, estima con la mayor precisión posible las posiciones planetarias (Signo y Casa) 
         para el siguiente nacimiento.
         Fecha: ${birthInfo.birthDay}/${birthInfo.birthMonth}/${birthInfo.birthYear}
         Hora: ${birthInfo.birthHour}:${birthInfo.birthMinute}
         Lugar: ${birthInfo.city}, ${birthInfo.country}
 
+        Genera posiciones geocéntricas completas y una carta heliocéntrica para el análisis del alma.
+        
         Devuelve un JSON con:
         1. geocentric: Lista de objetos { planet, sign, house } para los 10 planetas + Quirón y Nodos.
         2. heliocentric: Lista de objetos { planet, sign, house } para los planetas (usando el Sol como centro).
@@ -62,27 +64,27 @@ export const getAkashicAnalysis = async (data: NatalData): Promise<AkashicAnalys
     
     const prompt = `
         Actúa como un Maestro Supremo en Astrología Esotérica, Registros Akáshicos y Conexiones Galácticas.
-        Analiza profundamente esta configuración:
+        Usa la metodología "Astrodiest" para el análisis de asteroides y "Starseed Origins" para las estrellas fijas.
 
-        CONSULTANTE: ${data.name}
-        VOCACIÓN: ${data.vocation}
-        NACIMIENTO: ${data.birthDay}/${data.birthMonth}/${data.birthYear} a las ${data.birthHour}:${data.birthMinute} en ${data.city}, ${data.country}.
+        PERFIL DEL ALMA: ${data.name}
+        MISIÓN ACTUAL: ${data.vocation}
+        COORDENADAS ESPACIO-TIEMPO: ${data.birthDay}/${data.birthMonth}/${data.birthYear} | ${data.city}, ${data.country}.
 
-        DATOS GEOCÉNTRICOS (Personalidad): ${JSON.stringify(data.geocentric)}
-        DATOS HELIOCÉNTRICOS (Misión del Alma): ${JSON.stringify(data.heliocentric)}
-        ASTEROIDES ACTIVOS: ${data.asteroids.join(", ")}
-        ESTRELLAS FIJAS: ${data.fixedStars.join(", ")}
+        DATOS GEOCÉNTRICOS (Vehículo Terrestre): ${JSON.stringify(data.geocentric)}
+        DATOS HELIOCÉNTRICOS (Esencia Solar): ${JSON.stringify(data.heliocentric)}
+        ASTEROIDES ACTIVOS (Metodología Astrodiest): ${data.asteroids.join(", ")}
+        ESTRELLAS FIJAS (Marcadores Starseed): ${data.fixedStars.join(", ")}
 
-        Análisis requerido:
-        1. Origen Akáshico: Vidas pasadas clave y herencia kármica.
-        2. Talentos de Encarnación: Habilidades prácticas actuales.
-        3. Talentos Dormidos: Habilidades espirituales heliocéntricas.
-        4. Legado Starseed: Conexiones con sistemas estelares (Sirio, Pléyades, etc.) según las estrellas fijas.
-        5. Sabiduría de Asteroides: Talentos específicos (sanación, sabiduría, justicia).
-        6. Alineación Vocacional: Cómo su trabajo actual se conecta con su plan de alma.
-        7. Sendero Esotérico y Rayo Primario.
+        Tu misión es revelar:
+        1. Origen Akáshico: El punto de partida galáctico y las memorias de vidas pasadas predominantes.
+        2. Talentos de Encarnación: Capacidades tangibles en esta vida (foco geocéntrico).
+        3. Talentos Dormidos: Capacidades del alma que esperan ser activadas (foco heliocéntrico).
+        4. Legado Starseed: Basado en las Estrellas Fijas seleccionadas, identifica de qué sistema estelar proviene su linaje (Sirio, Pléyades, Arcturus, etc.).
+        5. Sabiduría de Asteroides: Talentos de interpretación astrológica y sanación según los asteroides Astrodiest.
+        6. Alineación Vocacional: Cómo su vocación declarada encaja en el Plan Divino.
+        7. Sendero Esotérico y Rayo Primario de los Siete Rayos.
 
-        Responde en formato JSON.
+        Responde en formato JSON detallado.
     `;
 
     const response = await ai.models.generateContent({

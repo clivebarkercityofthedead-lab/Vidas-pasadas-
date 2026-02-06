@@ -11,13 +11,29 @@ export const PLANETS = [
     "Saturno", "Urano", "Neptuno", "Plutón", "Quirón", "Nodo Norte", "Nodo Sur"
 ];
 
-export const ASTEROIDS = [
-    "Ceres", "Pallas", "Juno", "Vesta", "Hygeia", "Astraea", "Hebe", "Iris", "Flora", "Metis"
-];
+// Expanded Asteroids based on "Astrodiest" methodology for Talents and Past Lives
+export const ASTEROID_CATEGORIES = {
+    "Talento y Sabiduría": ["Pallas", "Urania", "Minerva", "Sapiéntia", "Sophy", "Musa"],
+    "Kármicos y Vidas Pasadas": ["Kaali", "Shiva", "Karma", "Nemesis", "Leto", "Mnemosyne"],
+    "Sanación y Nutrición": ["Ceres", "Higea", "Panacea", "Aesculapius", "Chiron", "Salacia"],
+    "Amor y Alma": ["Juno", "Vesta", "Psyche", "Eros", "Amor", "Anteros"]
+};
 
-export const FIXED_STARS = [
-    "Sirio", "Canopus", "Arturo", "Rigel", "Vega", "Capella", "Rigil Kentaurus", "Procyon", "Achernar", "Betelgeuse", "Hadar", "Altair", "Aldebarán", "Antares", "Espiga", "Pollux", "Fomalhaut", "Deneb", "Regulus"
-];
+export const ASTEROIDS = Object.values(ASTEROID_CATEGORIES).flat();
+
+// Expanded Fixed Stars categorized by Starseed Origins
+export const STARSEED_STARS = {
+    "Sirianos": ["Sirio", "Murzim", "Muliphein"],
+    "Pleyadianos": ["Alcyone", "Maia", "Electra", "Merope", "Taygeta"],
+    "Arcturianos": ["Arturo"],
+    "Andromedanos": ["Alpheratz", "Mirach", "Almach"],
+    "Orionitas": ["Rigel", "Betelgeuse", "Bellatrix", "Mintaka"],
+    "Lirianos": ["Vega", "Sheliak"],
+    "Antarianos/Marcianos": ["Antares"],
+    "Reales (Persas)": ["Regulus", "Aldebarán", "Fomalhaut", "Antares"]
+};
+
+export const FIXED_STARS = Object.values(STARSEED_STARS).flat();
 
 export const SEVEN_RAYS_INFO = [
     { id: 1, name: "Voluntad o Poder", color: "text-blue-400", bg: "bg-blue-900/20", description: "La fuerza de propósito y la iniciativa divina." },
